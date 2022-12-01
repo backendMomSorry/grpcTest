@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+
+service PaymentService {
+  rpc proceed (PaymentRequestDto) returns (PaymentResponse) {}
+}
+
+message PaymentRequestDto {
+  int64 customer_id = 1 [json_name = "customer_id"];
+  double price = 2;
+  double price_modifier = 3 [json_name = "price_modifier"];
+  PaymentMethodDto payment_method = 4 [json_name = "payment_method"];
+  string datetime = 5;
+  optional AdditionalItem additional_item = 6 [json_name = "additional_item"];
+}
+
+message PaymentResponse {
+  optional double final_price = 1 [json_name = "final_price"];
+  optional int32 points = 2;
+  optional string error = 3;
+}
+
+enum PaymentMethodDto {
+  CASH = 0;
+  CASH_ON_DELIVERY = 1;
+  VISA = 2;
+  MASTERCARD = 3;
+  AMEX = 4;
+  JCB = 5;
+  LINE_PAY = 6;
+  PAYPAY = 7;
+  POINTS = 8;
+  GRAB_PAY = 9;
+  BANK_TRANSFER = 10;
+  CHEQUE = 11;
+}
+
+message AdditionalItem {
+  optional string last_4 = 1 [json_name = "last_4"];
+}

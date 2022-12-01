@@ -1,3 +1,3 @@
 
-rootProject.name = "AnyMindTest"
+rootProject.name = "grpcTest"
 
